@@ -1,8 +1,8 @@
-# Bioinformatics Mini-Project: Pattern Recognition
+# Bioinformatics Mini-Project: Pattern recognition and the read alignment problem
 
-This was included a mini project in course number 4 of the "Genomic Data Science" MOOC.
+This was inspired by a set assignment given by the"Genomic Data Science" MOOC, offered by Johns Hopkins university.
+The taught module explained the read alignment problem in Bioinformtaics, and the ways the problem was algorithmically solved. I decided to combine aspects of the learned content with the wrapping of a small sequence of code which allows a user to independetly check for alignment rates of reads against a reference genome.
 
-This mini-project functions by taking sequenced reads of a genome and running against a given reference genome, finding and returning the number of Matchces found.
 
 ________________________________________________________________________________________________________________________________________________________________________________
 
@@ -18,4 +18,4 @@ To do:
 
 - Prompt the user the amount of mismatches they'd like to include in the pattern
 - Reinsert the final function which gave the user a count of how many reads were mapped to the reference genome
--input an example genome+reads
+-provide an example genome+reads
