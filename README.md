@@ -20,6 +20,9 @@ ________________________________________________________________________________
 
 To do:
 
-- Prompt the user the amount of mismatches they'd like to include in the pattern
+While i suffer from time contrainsts a prominent feature i am intending to include is to add more efficient algorithms (for example, Boyer-Moore) to this project, which will allow me to compare the efficiency and speed of alignment.
+
+Also, to add:
+- Prompt the user the amount of mismatches they'd like to include in the naive pattern recognition algorithm
 - Reinsert the final function which provides the user with a count of how many reads were successfully mapped to the reference genome
 - Provide an example genome and corresponding reads
