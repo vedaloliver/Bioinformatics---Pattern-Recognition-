@@ -4,6 +4,8 @@ pattern = 'AGGAGGTT'
 
 numreads = 0
 readlen = 0
+nummatched = 0
+
 
 
 def readGenome(filename):
@@ -46,10 +48,8 @@ def reversecomplement(read):
 
 def naive(p, t):
     # to determine if the pattern being looked for is in the full strand
-    # includes functionality to also look for reverse complement variation
-    # this functionality was extended to remove complement variation if the pattern and reverse complement was the same
     occurrences = []
-    # naive algorithm
+    # naive algorithm implementation
     for i in range(len(t) - len(p) + 1):
         match = True
         for j in range(len(p)):
@@ -63,10 +63,10 @@ def naive(p, t):
 
 def naive_with_reverse(p, p_rev, t):
     # to determine if the pattern being looked for is in the full strand
-    # includes functionality to also look for reverse complement variation
+    # functionality to also look for reverse complement variation
     # this functionality was extended to remove complement variation if the pattern and reverse complement was the same
     occurrences = []
-    # naive algorithm
+    # naive algorithm implementation
     for i in range(len(t) - len(p) + 1):
         match = True
         for j in range(len(p)):
@@ -106,7 +106,7 @@ def naive_2mm(p, t):
 
 
 def generatereads(genome, numreads, readlen):
-    # makes random reads from the given genome so we can test the matching algortihm without having to find a genome and corresponding reads
+    # makes random reads from the given genome so we can test the matching algorithm without having to find a genome and corresponding reads
 
     reads = []
     for i in range(numreads):
@@ -117,22 +117,79 @@ def generatereads(genome, numreads, readlen):
 
 def read_checker(reads):
     # checks if the reads match the genome
-    nummatched = 0
-    for r in reads:
-        matches = naive(r, genome)
-        print(matches)
-        if len(matches) > 0:
-            nummatched += 1
+    reads = ''
+    choice = 0
 
-    result = ('%d / %d reads matched exactly.' % (nummatched, len(reads)))
-    return result
+    def algorithm_choice():
+        global nummatched
+        print('\nWhat algorithm do you want to check your reads against?')
+        while True:
+            print('\nGeneric Naive = 1\n\nNaive with reverse complement checks = 2\n\nNaive with mismatch allowance = 3\n\nExit Program = 4:')
+            choice = ((input()))
+            if choice == str(1):
+                print('Executing generic naive algorithm.')
+                for r in reads:
+                    matches = naive(r, genome)
+                    print(('%d / %d reads matched.' % (nummatched+1, len(reads))))
+                    if len(matches) > 0:
+                        nummatched += 1
+                break
+            elif choice == str(2):
+                print('(NOT FINISHED FUNCTIONALITY.).')
+                break
+            elif choice == str(3):
+                print('\nExecuting the naive algorithm with mismatch allowance.\n')
+                for r in reads:
+                    matches = naive_2mm(r, genome)
+                    print(('%d / %d reads matched.' % (nummatched+1, len(reads))))
+                    if len(matches) > 0:
+                        nummatched += 1
+                break
+            elif choice == str(4):
+                print('\nProgram terminated.\n')
+                break
+            else:
+                print("Invalid. Please try again.")
 
 
+    print('\nWelcome. Do you already have reads corresponding to the genome, or would you like us to randomly generate reads?\n')
+    while True:
+        print('Have reads = 1\n\nRandomly Generate reads = 2\n\nTerminate program = 3\n')
+        choice = ((input()))
+        if choice == str(1):
+            print('(NOT FINISHED FUNCTIONALITY.).')
+        elif choice == str(2):
+            print('Starting random generation of reads.')
+            reads = randomreads
+            algorithm_choice()
+            break
+        elif choice == str(3):
+            print('\nProgram terminated.\n')
+            break
+        else:
+            print("Invalid. Please try again.")
+
+        
+
+    
+    result = ('Finished. The result is: %d / %d reads matched.' % (nummatched, len(reads)))
+    print (result)
+
+# reads the genome for use in code bas
 genome = readGenome(virus_file)
+#generates random reads 
+randomreads = generatereads(genome, 5, 100)
 
-randomreads = generatereads(genome, 10, 100)
-print(randomreads)
-print(read_checker(randomreads))
-#print (readGenome(virus_file))
+read_checker(randomreads)
+# #print (reversecomplement(randomreads))
+
+#generates a reverse complement for each randomly generated read
+# for i in range(len(randomreads)):
+#     print (reversecomplement(randomreads[i]))
+
+
+
+
+#print(read_checker(randomreads))
 #print (naive(pattern,reversecomplement(pattern), readGenome(virus_file)))
 #print (naive_2mm(pattern, readGenome(virus_file)))
