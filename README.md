@@ -29,7 +29,6 @@ While i suffer from time contrainsts a prominent feature i am intending to inclu
 Also, to add:
 - Prompt the user the amount of mismatches they'd like to include in the naive pattern recognition algorithm
 - Provide an example genome and corresponding reads: i have given genome data for the Enterobacteria phage λ, but it is a little bit difficult to find good quality reads, therefore, i have implemented a random read generator which will makes corresponding to the given genome,  and thus be able test the naive algorithm and it's variances.
-
-- since we are using this method, my next step is to implement user input. The user will be prompted for:
-1. the number of reads and read length to be randomly generated
-2. the naive algorithm variance (naive, naive with reverse, naive with mismatch) to match the randomly generated reads against
+- Fixing of the reverse complement function to work with randomly generated reads
+- tidy up the codee
+- promt the user for the number of reads and read length if random generation is to be chosen
